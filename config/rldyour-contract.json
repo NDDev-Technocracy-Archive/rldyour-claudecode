@@ -1862,7 +1862,7 @@
       "id": "codeql-upload",
       "description": "CodeQL SARIF upload for public repo security analysis",
       "claude": {
-        "workflow": ".github/workflows/codeql.yml"
+        "workflow": ".github/workflows/security.yml"
       },
       "codex": {
         "status": "adapter repository should run CodeQL or documented equivalent"
@@ -1881,7 +1881,7 @@
       "id": "dependency-review",
       "description": "Pull-request dependency diff review",
       "claude": {
-        "workflow": ".github/workflows/dependency-review.yml"
+        "workflow": ".github/workflows/security.yml"
       },
       "codex": {
         "status": "adapter repository should run dependency review or documented equivalent"
@@ -1900,7 +1900,7 @@
       "id": "secret-scan",
       "description": "Secret scan and security pattern scan",
       "claude": {
-        "workflow": ".github/workflows/gitleaks.yml"
+        "workflow": ".github/workflows/validate.yml"
       },
       "codex": {
         "status": "adapter repository must run secret scanning"
@@ -1919,7 +1919,7 @@
       "id": "actionlint",
       "description": "GitHub workflow lint",
       "claude": {
-        "workflow": ".github/workflows/actionlint.yml"
+        "workflow": ".github/workflows/validate.yml"
       },
       "codex": {
         "status": "adapter repository must lint workflows"
