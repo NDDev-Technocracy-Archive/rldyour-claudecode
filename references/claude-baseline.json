@@ -1,19 +1,19 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "schema_version": 1,
-  "verified_on": "2026-08-22",
+  "verified_on": "2026-11-01",
   "baseline": {
     "claude_code": {
-      "version": "2.1.220",
+      "version": "2.1.316",
       "npm_package": "@anthropic-ai/claude-code",
       "ref": "https://github.com/anthropics/claude-code/blob/main/CHANGELOG.md",
       "docs_ref": "https://code.claude.com/docs/en/changelog",
       "package_ref": "https://www.npmjs.com/package/@anthropic-ai/claude-code",
-      "package_published_at": "2026-07-24T23:11:21.821Z",
+      "package_published_at": "2026-10-31T00:42:05.743Z",
       "npm_dist_tags": {
-        "latest": "2.1.220",
-        "next": "2.1.220",
-        "stable": "2.1.197"
+        "latest": "2.1.316",
+        "next": "2.1.316",
+        "stable": "2.1.309"
       },
       "model_config_ref": "https://code.claude.com/docs/en/model-config"
     },
@@ -49,7 +49,8 @@
       "claude-code-2-1-199-runtime-rollup",
       "claude-code-2-1-205-runtime-rollup",
       "claude-code-2-1-206-runtime-rollup",
-      "claude-code-2-1-220-runtime-rollup"
+      "claude-code-2-1-220-runtime-rollup",
+      "claude-code-2-1-316-runtime-rollup"
     ]
   }
 }
