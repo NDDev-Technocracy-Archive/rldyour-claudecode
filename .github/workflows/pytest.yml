@@ -39,7 +39,7 @@ jobs:
       matrix:
         # Heavy pytest remains Ubuntu-only; cross-platform.yml provides
         # standard public Ubuntu/Windows/macOS smoke coverage.
-        os: [ubuntu-latest]
+        os: [ubuntu-24.04]
         python-version: ['3.13']
     steps:
       - name: Harden runner (egress block + explicit allowlist)
