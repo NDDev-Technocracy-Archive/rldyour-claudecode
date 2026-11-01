@@ -24,7 +24,7 @@ concurrency:
 jobs:
   validate-marketplace:
     name: claude plugin validate
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     permissions:
       contents: read
@@ -92,7 +92,7 @@ jobs:
       matrix:
         # Heavy validation remains Ubuntu-only; cross-platform.yml provides
         # standard public Ubuntu/Windows/macOS smoke coverage.
-        os: [ubuntu-24.04]
+        os: [ubuntu-26.04]
     steps:
       - name: Harden runner (egress block + explicit allowlist)
         if: runner.os == 'Linux'  # harden-runner is Linux-only (per ADR-0010)
@@ -302,14 +302,14 @@ jobs:
         # any .mcp.json pin bump per MCP-01-TRANSPORT.
 
   workflows:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
           fetch-depth: 0
-      - uses: NDDev-Technocracy-Standarts/std-0004-ci-cd-workflows/.github/actions/tools@c192c6adcf22088abf456635de614d42e8fa3f8d # nddev-cicd-v0.6.20
+      - uses: NDDev-Technocracy-Standarts/std-0004-ci-cd-workflows/.github/actions/tools@ab5739f31d142275590b35c654def3e027ec6c4f # nddev-cicd-v0.6.22
         with:
           capability: security
       - name: Lint and audit workflows
