@@ -17,6 +17,8 @@ native compatibility qualification remain CI/updater results, not a prose copy.
   supply-chain report.
 
 The new shared source/merge-stop calls operate beside these native obligations.
+The source caller declares exact official actionlint/Zizmor/Betterleaks assets
+in `.github/ci-tools.json`; hosted jobs verify archive and executable bytes.
 `just check` runs offline workflow/command checks; `just verify` adds the
 retained complete-history source scan. These commands do not run an agent,
 install a plugin, start a session or call a provider.

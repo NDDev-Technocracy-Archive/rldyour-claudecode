@@ -310,6 +310,7 @@ jobs:
       hosted-runner: ubuntu-26.04
       recipe: ${{ github.event_name == 'pull_request' && 'check' || 'verify' }}
       fetch-depth: 0
+      tool-assets: .github/ci-tools.json
       timeout-minutes: 10
 
   merge-stops:
