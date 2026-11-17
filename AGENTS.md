@@ -98,16 +98,13 @@ system instruction files on `main` (see the top of this file); only the
 
 ## CI runner selection
 
-Every workflow run is evidence and must finish. Use a concurrency group unique
-to `github.run_id` and `cancel-in-progress: false`; never discard a queued or
-running check as superseded.
+Native jobs keep their existing concurrency/evidence policy. Shared source and
+merge-stop jobs follow the pinned workflow contract; retain failed/cancelled
+attempts and qualify the actual latest required attempt.
 
-This repository is public, so `pull_request` executes untrusted fork code.
-Every caller of a `NDDev-OpenNetwork/ci-workflows` reusable that exposes a `runner`
-input passes `runner: ubuntu-latest` explicitly, and must keep it. Several of
-those reusables may default `runner` to the retired `amsterdam` label, and
-that default is a property of the **pinned commit**, not of this
-repository, so dropping the explicit value would let a routine pin bump route
-fork PRs onto trusted private infrastructure with no diff here to review. On
-any ci-workflows pin bump, diff `inputs.runner.default` between the old and
-new commit before merging.
+This repository is public and executes untrusted fork source. Native jobs use
+standard GitHub-hosted OS labels. Shared source callers name the hosted runner
+explicitly; their published visibility guard never selects private infrastructure
+for a public repository. Verify that routing contract and actual hosted execution
+when the normal updater changes the shared release. Read
+[the workflow guide](.github/workflows/README.md) for current source/native scope.

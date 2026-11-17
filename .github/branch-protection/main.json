@@ -3,13 +3,15 @@
   "maintainer_access": "maintainer can administer; required checks still apply to pushes",
   "required_status_checks": [
     "claude plugin validate",
-    "Python + shell + JSON syntax + smoke (ubuntu-latest)",
-    "analyze (python) / CodeQL (python)",
-    "analyze (actions) / CodeQL (actions)",
-    "gitleaks scan / Gitleaks secret scan",
-    "cross-platform smoke (ubuntu-latest) / smoke (ubuntu-latest)",
-    "cross-platform smoke (windows-latest) / smoke (windows-latest)",
-    "cross-platform smoke (macos-latest) / smoke (macos-latest)"
+    "Python + shell + JSON syntax + smoke (ubuntu-26.04)",
+    "codeql (python)",
+    "codeql (actions)",
+    "dependency-review",
+    "smoke (ubuntu-26.04)",
+    "smoke (windows-2025)",
+    "smoke (macos-26)",
+    "workflows / recipe",
+    "merge-stops / merge stops"
   ],
   "strict_required_status_checks": true,
   "allow_force_pushes": false,
@@ -22,11 +24,12 @@
   },
   "enforce_admins": false,
   "notes": [
-    "This file documents the desired branch protection state for the public main branch.",
-    "Apply it through GitHub Settings -> Branches or through a ruleset matching this shape.",
-    "Required status checks are selected from workflows that run on every pull request to main.",
-    "Path-filtered or scheduled-only jobs are intentionally not required here because GitHub branch protection waits for required checks even when a workflow is not triggered.",
-    "Linear history is OFF on purpose: the estate policy is merge commits only (squash and rebase are disabled), and required_linear_history forbids merge commits - the two cannot both hold.",
-    "Approvals are 0 and code-owner review is off because this is a single-maintainer repository: GitHub does not allow approving your own pull request, so any non-zero requirement is satisfiable only by an admin bypass on every merge."
+    "This file documents the desired protection for the public main branch; actual organization and classic settings are reconciled independently.",
+    "Every required name is an observed current GitHub Actions check (App 15368), including native CLI/syntax, both CodeQL languages, dependency review, all three platform lanes and the source/security jobs.",
+    "Mandatory merge stops retain the original pull-request commit-range secret gate; default/manual source verify retains complete-history scanning. Neither replaces native CLI/syntax, CodeQL, dependency review or platform checks.",
+    "pytest (ubuntu-26.04 / py3.13) remains required when its workflow paths are eligible, but is excluded from the unconditional branch floor because its workflow is path-filtered.",
+    "Scorecard, security-daily, CLI/dependency drift and release are push-only, scheduled, manual or operator workflows; they cannot be unconditional pull-request requirements.",
+    "Linear history remains off because verified changes use merge commits. No force pushes or branch deletion.",
+    "Approvals remain zero and code-owner review off for the existing single-maintainer contract; existing administrative settings are unchanged."
   ]
 }
