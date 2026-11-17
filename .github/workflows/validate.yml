@@ -10,6 +10,7 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+    types: [opened, synchronize, reopened, labeled, edited]
   workflow_dispatch:
 
 # Deny-all default per OWASP A01:2025; grant per-job below.
@@ -302,28 +303,18 @@ jobs:
         # any .mcp.json pin bump per MCP-01-TRANSPORT.
 
   workflows:
-    runs-on: ubuntu-26.04
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-          fetch-depth: 0
-      - uses: NDDev-Technocracy-Standarts/std-0004-ci-cd-workflows/.github/actions/tools@ab5739f31d142275590b35c654def3e027ec6c4f # nddev-cicd-v0.6.22
-        with:
-          capability: security
-      - name: Lint and audit workflows
-        run: |
-          actionlint
-          zizmor --offline --no-progress .github/workflows/validate.yml .github/workflows/claude-cli-drift.yml .github/workflows/cross-platform.yml .github/workflows/dependency-check.yml .github/workflows/pytest.yml .github/workflows/security.yml .github/dependabot.yml
-      - name: Scan new pull request commits, or the full history on main
-        env:
-          BASE: ${{ github.event.pull_request.base.sha }}
-          HEAD: ${{ github.event.pull_request.head.sha }}
-        run: |
-          if [ -n "$BASE" ]; then
-            gitleaks git --no-banner --redact --log-opts="$BASE..$HEAD" .
-          else
-            gitleaks git --no-banner --redact .
-          fi
+    uses: NDDev-Technocracy-OpenNetwork/nddev-ci/.github/workflows/recipe.yml@a12acfc75fd7daee2fac9a246ee60683fe18955b # v0.6.67
+    permissions:
+      contents: read
+    with:
+      hosted-runner: ubuntu-26.04
+      recipe: ${{ github.event_name == 'pull_request' && 'check' || 'verify' }}
+      fetch-depth: 0
+      timeout-minutes: 10
 
+  merge-stops:
+    uses: NDDev-Technocracy-OpenNetwork/nddev-ci/.github/workflows/merge-stops.yml@a12acfc75fd7daee2fac9a246ee60683fe18955b # v0.6.67
+    permissions:
+      contents: read
+    with:
+      hosted-runner: ubuntu-26.04
